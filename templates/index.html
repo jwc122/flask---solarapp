@@ -27,7 +27,12 @@
     .advice-link {
       margin-top: 5px;
     }
+    canvas {
+      margin-top: 20px;
+      max-width: 100%;
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <h1>PVGIS Data Fetch</h1>
@@ -89,6 +94,12 @@
 
   <button id="submitButton">Submit</button>
   <div id="pvgisResponse"></div>
+
+  <h2>Charts</h2>
+  <div>
+    <canvas id="chartEdElostd"></canvas>
+    <canvas id="chartFfFe"></canvas>
+  </div>
 
   <script>
     function updateApiValues(systemId) {
@@ -168,6 +179,13 @@
       // Split the data string by spaces or tabs (assuming the data is separated by whitespace)
       const rows = data.trim().split(/\s+/);
 
+      // Arrays to hold data for charts
+      const months = [];
+      const edData = [];
+      const elostdData = [];
+      const ffData = [];
+      const feData = [];
+
       // Prepare the HTML for the table
       let tableHTML = "<table>";
 
@@ -187,10 +205,17 @@
         // Check if the monthIndex is valid (i.e., between 0 and 11 inclusive)
         if (monthIndex >= 0 && monthIndex < 12) {
           const monthName = monthNames[monthIndex];
-          const E_d = rows[i + 1];
-          const E_lost_d = rows[i + 2];
-          const f_f = rows[i + 3];
-          const f_e = rows[i + 4];
+          const E_d = parseFloat(rows[i + 1]);
+          const E_lost_d = parseFloat(rows[i + 2]);
+          const f_f = parseFloat(rows[i + 3]);
+          const f_e = parseFloat(rows[i + 4]);
+
+          // Populate chart data arrays
+          months.push(monthName);
+          edData.push(E_d);
+          elostdData.push(E_lost_d);
+          ffData.push(f_f);
+          feData.push(f_e);
 
           tableHTML += `<tr>`;
           tableHTML += `<td>${monthName}</td>`;
@@ -214,6 +239,44 @@
 
       // Set the innerHTML of the responseDiv to the new table and explanation
       responseDiv.innerHTML = tableHTML + explanationText;
+
+      // Generate the combined charts
+      createCombinedChart('chartEdElostd', 'E_d (Wh/d) vs E_lost_d (Wh/d)', months, edData, elostdData, 'E_d (Wh/d)', 'E_lost_d (Wh/d)');
+      createCombinedChart('chartFfFe', 'f_f (%) vs f_e (%)', months, ffData, feData, 'f_f (%)', 'f_e (%)');
+    }
+
+    // Function to create a combined bar chart with two datasets
+    function createCombinedChart(chartId, label, labels, data1, data2, label1, label2) {
+      const ctx = document.getElementById(chartId).getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: label1,
+              data: data1,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: label2,
+              data: data2,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
     }
 
     // Add event listener to submit button
