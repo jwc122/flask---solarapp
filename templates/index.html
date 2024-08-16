@@ -64,53 +64,7 @@
     <option value="51.5074,-0.1278">Greater London</option>
     <option value="53.8008,-1.5491">West Yorkshire</option>
     <option value="52.4862,-1.8904">West Midlands</option>
-    <option value="53.4084,-2.9916">Merseyside</option>
-    <option value="53.3811,-1.4701">South Yorkshire</option>
-    <option value="52.2053,0.1218">Cambridgeshire</option>
-    <option value="50.7192,-1.8808">Dorset</option>
-    <option value="52.9548,-1.1581">Nottinghamshire</option>
-    <option value="51.4545,-2.5879">Bristol</option>
-    <option value="51.8657,-2.2431">Gloucestershire</option>
-    <option value="53.8008,-1.5491">Leeds</option>
-    <option value="51.5074,-0.1278">Greater London</option>
-    <option value="51.5074,-0.1278">Middlesex</option>
-    <option value="50.3755,-4.1427">Devon</option>
-    <option value="54.9783,-1.6174">Tyne and Wear</option>
-    <option value="51.5079,-0.0877">City of London</option>
-    <option value="51.4816,-3.1791">Cardiff</option>
-    <option value="53.4723,-2.2935">Greater Manchester</option>
-    <option value="51.7520,-1.2577">Oxfordshire</option>
-    <option value="50.7184,-3.5339">Exeter</option>
-    <option value="53.483959,-2.244644">Lancashire</option>
-    <option value="54.5973,-5.9301">Belfast</option>
-    <option value="52.1920,-2.2217">Worcestershire</option>
-    <option value="55.9533,-3.1883">Edinburgh</option>
-    <option value="52.4068,-1.5197">Warwickshire</option>
-    <option value="52.3555,-1.1743">Northamptonshire</option>
-    <option value="51.4545,-2.5879">Somerset</option>
-    <option value="51.2389,-0.5669">Surrey</option>
-    <option value="53.8008,-1.5491">West Yorkshire</option>
-    <option value="51.5074,-0.1278">Essex</option>
-    <option value="53.7632,-2.7031">Lancashire</option>
-    <option value="52.6297,-1.1398">Leicester</option>
-    <option value="53.4084,-2.9916">Liverpool</option>
-    <option value="53.483959,-2.244644">Manchester</option>
-    <option value="53.8122,-3.0507">Blackpool</option>
-    <option value="54.9783,-1.6174">Newcastle upon Tyne</option>
-    <option value="51.6214,-3.9436">Swansea</option>
-    <option value="55.3781,-3.4360">Scotland</option>
-    <option value="53.2276,-0.5406">Lincolnshire</option>
-    <option value="54.3225,-2.7517">Cumbria</option>
-    <option value="51.4816,-3.1791">Wales</option>
-    <option value="54.7877,-1.5772">Durham</option>
-    <option value="51.4545,-0.9781">Reading</option>
-    <option value="53.835,-1.7767">Bradford</option>
-    <option value="54.9085,-1.3833">Sunderland</option>
-    <option value="51.898,-2.0782">Cheltenham</option>
-    <option value="51.7323,-1.2684">Oxford</option>
-    <option value="54.5666,-1.1622">Middlesbrough</option>
-    <option value="51.4816,-3.1791">Newport</option>
-    <option value="51.812,-1.2591">Abingdon</option>
+    <!-- Add more options as needed -->
   </select><br>
 
   <label for="angle">Angle (degrees):</label>
@@ -211,37 +165,40 @@
       const monthNames = ["January", "February", "March", "April", "May", "June", 
                           "July", "August", "September", "October", "November", "December"];
 
-      // Split the data into rows by the actual newline characters
-      const rows = data.split("\\n").filter(row => row.trim() !== '');
+      // Split the data string by spaces or tabs (assuming the data is separated by whitespace)
+      const rows = data.trim().split(/\s+/);
 
-      // Start building the table
+      // Prepare the HTML for the table
       let tableHTML = "<table>";
 
-      // First row is the header
-      let headers = rows[0].split("\\t").map(header => header.trim());
-      headers = headers.filter(header => header !== ""); // Remove any empty headers
+      // Create the header row
       tableHTML += "<tr>";
-      headers.forEach(header => {
-          tableHTML += `<th>${header}</th>`;
-      });
+      tableHTML += "<th>Month</th>";
+      tableHTML += "<th>E_d (Wh/d)</th>";
+      tableHTML += "<th>E_lost_d (Wh/d)</th>";
+      tableHTML += "<th>f_f (%)</th>";
+      tableHTML += "<th>f_e (%)</th>";
       tableHTML += "</tr>";
 
-      // Handle the rest of the rows
-      for (let i = 1; i < rows.length; i++) {
-          let columns = rows[i].split("\\t").map(col => col.trim());
-          columns = columns.filter(col => col !== ""); // Remove any empty columns
+      // Now loop through the data and insert it into the table
+      for (let i = 0; i < rows.length; i += 5) {
+        // Ensure that we have enough data for a full row
+        if (i + 4 < rows.length) {
+          const monthIndex = parseInt(rows[i], 10) - 1; // Convert to zero-based index for the month
+          const monthName = monthNames[monthIndex];
+          const E_d = rows[i + 1];
+          const E_lost_d = rows[i + 2];
+          const f_f = rows[i + 3];
+          const f_e = rows[i + 4];
 
-          // Replace the month number (first column) with the corresponding month name
-          const monthIndex = parseInt(columns[0], 10) - 1; // Convert to zero-based index
-          if (monthIndex >= 0 && monthIndex < 12) {
-              columns[0] = monthNames[monthIndex];
-          }
-
-          tableHTML += "<tr>";
-          columns.forEach(col => {
-              tableHTML += `<td>${col}</td>`;
-          });
-          tableHTML += "</tr>";
+          tableHTML += `<tr>`;
+          tableHTML += `<td>${monthName}</td>`;
+          tableHTML += `<td>${E_d}</td>`;
+          tableHTML += `<td>${E_lost_d}</td>`;
+          tableHTML += `<td>${f_f}</td>`;
+          tableHTML += `<td>${f_e}</td>`;
+          tableHTML += `</tr>`;
+        }
       }
 
       tableHTML += "</table>";
