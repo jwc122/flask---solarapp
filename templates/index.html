@@ -182,9 +182,10 @@
 
       // Now loop through the data and insert it into the table
       for (let i = 0; i < rows.length; i += 5) {
-        // Ensure that we have enough data for a full row
-        if (i + 4 < rows.length) {
-          const monthIndex = parseInt(rows[i], 10) - 1; // Convert to zero-based index for the month
+        const monthIndex = parseInt(rows[i], 10) - 1; // Convert to zero-based index for the month
+
+        // Check if the monthIndex is valid (i.e., between 0 and 11 inclusive)
+        if (monthIndex >= 0 && monthIndex < 12) {
           const monthName = monthNames[monthIndex];
           const E_d = rows[i + 1];
           const E_lost_d = rows[i + 2];
