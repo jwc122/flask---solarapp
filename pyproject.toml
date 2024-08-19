@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "flask-solar-app"
+name = "flask---solarapp"
 version = "0.1.0"
 description = "Flask application for Energian solar calculator"
 authors = ["Jonathan Cheung <jwc122@ic.ac.uk>"]
