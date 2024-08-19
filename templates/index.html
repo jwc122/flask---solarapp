@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PVGIS Data Fetch</title>
-  <!-- Link to the external CSS file -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- Link to Chart.js library -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <h1>PVGIS Data Fetch</h1>
@@ -70,13 +67,6 @@
   <button id="submitButton">Submit</button>
   <div id="pvgisResponse"></div>
 
-  <h2>Charts</h2>
-  <div>
-    <canvas id="chartEdElostd"></canvas>
-    <canvas id="chartFfFe"></canvas>
-  </div>
-
-  <!-- Link to the external JavaScript file -->
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
