@@ -6,7 +6,7 @@ authors = ["Jonathan Cheung <jwc122@ic.ac.uk>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8.10"
 flask = "^2.3.0"
 requests = "^2.7.0"
 [tool.poetry.scripts]
