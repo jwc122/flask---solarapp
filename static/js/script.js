@@ -82,16 +82,28 @@ function updateApiValues(systemId) {
     tableHTML += "<th>f_f (%)</th>";
     tableHTML += "<th>f_e (%)</th>";
     tableHTML += "</tr>";
+
+    const E_d_values = [];
+    const E_lost_d_values = [];
+    const f_f_values = [];
+    const f_e_values = [];
+    const months = [];
   
     for (let i = 0; i < rows.length; i += 5) {
       const monthIndex = parseInt(rows[i], 10) - 1;
   
       if (monthIndex >= 0 && monthIndex < 12) {
         const monthName = monthNames[monthIndex];
-        const E_d = rows[i + 1];
-        const E_lost_d = rows[i + 2];
-        const f_f = rows[i + 3];
-        const f_e = rows[i + 4];
+        const E_d = parseFloat(rows[i + 1]);
+        const E_lost_d = parseFloat(rows[i + 2]);
+        const f_f = parseFloat(rows[i + 3]);
+        const f_e = parseFloat(rows[i + 4]);
+
+        months.push(monthName);
+        E_d_values.push(E_d);
+        E_lost_d_values.push(E_lost_d);
+        f_f_values.push(f_f);
+        f_e_values.push(f_e);
   
         tableHTML += `<tr>`;
         tableHTML += `<td>${monthName}</td>`;
@@ -104,15 +116,74 @@ function updateApiValues(systemId) {
     }
   
     tableHTML += "</table>";
-  
-    const explanationText = `
-      <p><strong>E_d:</strong> Average energy production per day (Wh/d)</p>
-      <p><strong>E_lost_d:</strong> Average energy not captured per day (Wh/d)</p>
-      <p><strong>f_f:</strong> Percentage of days when the battery became full (%)</p>
-      <p><strong>f_e:</strong> Percentage of days when the battery became empty (%)</p>
+    responseDiv.innerHTML = tableHTML;
+
+    // Generate bar charts
+    const chartContainer = document.createElement('div');
+    chartContainer.innerHTML = `
+      <canvas id="edChart" width="400" height="200"></canvas>
+      <canvas id="ffChart" width="400" height="200"></canvas>
     `;
-  
-    responseDiv.innerHTML = tableHTML + explanationText;
+    responseDiv.appendChild(chartContainer);
+
+    const ctx1 = document.getElementById('edChart').getContext('2d');
+    const ctx2 = document.getElementById('ffChart').getContext('2d');
+
+    // Bar chart for E_d and E_lost_d
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: 'E_d (Wh/d)',
+            data: E_d_values,
+            backgroundColor: 'rgba(54, 162, 235, 0.5)'
+          },
+          {
+            label: 'E_lost_d (Wh/d)',
+            data: E_lost_d_values,
+            backgroundColor: 'rgba(255, 99, 132, 0.5)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Bar chart for f_f and f_e
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: 'f_f (%)',
+            data: f_f_values,
+            backgroundColor: 'rgba(75, 192, 192, 0.5)'
+          },
+          {
+            label: 'f_e (%)',
+            data: f_e_values,
+            backgroundColor: 'rgba(153, 102, 255, 0.5)'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
   }
   
   document.getElementById('submitButton').addEventListener('click', callApi);
@@ -122,4 +193,8 @@ function updateApiValues(systemId) {
     <input type="hidden" id="batterysize" value="">
   `;
   document.body.insertAdjacentHTML('beforeend', hiddenInputs);
-  
+
+  // Load Chart.js library
+  const script = document.createElement('script');
+  script.src = "https://cdn.jsdelivr.net/npm/chart.js";
+  document.head.appendChild(script);
