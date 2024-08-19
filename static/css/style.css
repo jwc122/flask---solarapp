@@ -1,5 +1,5 @@
 table {
-  width: 100%;
+  width: 100%;  /* You can reduce the width if needed, e.g., 80% */
   border-collapse: collapse;
   margin-bottom: 20px;
 }
@@ -9,19 +9,29 @@ table, th, td {
 }
 
 th, td {
-  padding: 8px;
+  padding: 4px;  /* Reduce padding to make the columns narrower */
   text-align: center;
+  font-size: 12px;  /* Optionally reduce font size */
+}
+
+th {
+  white-space: nowrap;  /* Prevent header text from wrapping */
+}
+
+td {
+  white-space: nowrap;  /* Prevent cell text from wrapping */
 }
 
 .system-info {
-  text-align: center;
+  text-align: middle;  /* Align the text to the left within the cell */
+  padding: 1px;  /* Further reduce padding in the system-info cell */
 }
 
 .system-info img {
-  width: 100px;
-  height: auto;
+  width: 150px;  /* Reduce the width to make the image 2x smaller */
+  height: auto; /* Maintain the aspect ratio */
 }
 
-.advice-link {
-  margin-top: 5px;
+.system-info p {
+  margin: 0;  /* Remove default paragraph margins to reduce space */
 }
