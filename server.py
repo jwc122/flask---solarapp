@@ -3,7 +3,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/root/flasksolarapp/static')
 
 # Flask is behind a proxy since we are using nginx.
 app.wsgi_app = ProxyFix(
