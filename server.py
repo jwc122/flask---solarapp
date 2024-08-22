@@ -46,4 +46,4 @@ def extract_relevant_data(response_text):
     return None
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
