@@ -1,7 +1,14 @@
 from flask import Flask, url_for, render_template, request, jsonify
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 import requests
 
 app = Flask(__name__)
+
+# Flask is behind a proxy since we are using nginx.
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
 
 @app.route('/')
 def index():
