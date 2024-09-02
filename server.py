@@ -5,6 +5,9 @@ import requests
 
 app = Flask(__name__, static_url_path='/static')
 
+# Disable template caching
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
 # Flask is behind a proxy since we are using nginx.
 # app.wsgi_app = ProxyFix(
 #     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
