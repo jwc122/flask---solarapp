@@ -92,7 +92,6 @@
     <option value="54.5666,-1.1622">Middlesbrough</option>
     <option value="51.4816,-3.1791">Newport</option>
     <option value="51.812,-1.2591">Abingdon</option>
-    <!-- Add more counties as needed -->
   </select><br>
 
   <label for="angle">Angle (degrees):</label>
@@ -116,9 +115,15 @@
   <input type="text" id="cutoff" placeholder="Enter cutoff"><br>
 
   <button id="submitButton">Submit</button>
-  <div id="pvgisResponse"></div>
+
+  <!-- Chart container with "Change" button and canvas for the chart -->
+  <div id="pvgisResponse">
+    <button id="changeButton">Change</button>
+    <canvas id="chartCanvas"></canvas>
+  </div>
+
+  <div id="pvgisResponseText"></div>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-#test 

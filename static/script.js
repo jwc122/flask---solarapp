@@ -98,21 +98,16 @@ function displayRelevantData(data) {
     }
   }
 
-  // Generate bar charts
-  responseDiv.innerHTML = "";  // Clear any previous content
-
-  const chartContainer = document.createElement('div');
-  chartContainer.innerHTML = `
-    <canvas id="edChart" width="400" height="200"></canvas>
-    <canvas id="ffChart" width="400" height="200"></canvas>
+  // Clear any previous content and set up the charts container
+  responseDiv.innerHTML = `
+    <button id="changeButton">Change</button>
+    <canvas id="chartCanvas" width="400" height="200"></canvas>
   `;
-  responseDiv.appendChild(chartContainer);
 
-  const ctx1 = document.getElementById('edChart').getContext('2d');
-  const ctx2 = document.getElementById('ffChart').getContext('2d');
+  const ctx = document.getElementById('chartCanvas').getContext('2d');
 
-  // Bar chart for E_d and E_lost_d
-  new Chart(ctx1, {
+  // Initialize with the first chart (E_d and E_lost_d)
+  let currentChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: months,
@@ -139,31 +134,67 @@ function displayRelevantData(data) {
     }
   });
 
-  // Bar chart for f_f and f_e
-  new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: months,
-      datasets: [
-        {
-          label: 'f_f (%)',
-          data: f_f_values,
-          backgroundColor: 'rgba(75, 192, 192, 0.5)'
+  // Add functionality to the Change button to switch charts
+  document.getElementById('changeButton').addEventListener('click', () => {
+    currentChart.destroy();  // Destroy the current chart
+
+    // Toggle between the two charts
+    if (currentChart.config.data.datasets[0].label === 'E_d (Wh/d)') {
+      // Switch to the f_f and f_e chart
+      currentChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: 'f_f (%)',
+              data: f_f_values,
+              backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            },
+            {
+              label: 'f_e (%)',
+              data: f_e_values,
+              backgroundColor: 'rgba(153, 102, 255, 0.5)'
+            }
+          ]
         },
-        {
-          label: 'f_e (%)',
-          data: f_e_values,
-          backgroundColor: 'rgba(153, 102, 255, 0.5)'
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
+      });
+    } else {
+      // Switch back to the E_d and E_lost_d chart
+      currentChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: 'E_d (Wh/d)',
+              data: E_d_values,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)'
+            },
+            {
+              label: 'E_lost_d (Wh/d)',
+              data: E_lost_d_values,
+              backgroundColor: 'rgba(255, 99, 132, 0.5)'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
         }
-      }
+      });
     }
   });
 }
