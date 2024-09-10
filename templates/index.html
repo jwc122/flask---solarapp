@@ -13,116 +13,77 @@
     </div>
   </div>
 
-  <table>
-    <tr>
-      <th>System</th>
-      <th>Solar (W)</th>
-      <th>Battery (Wh)</th>
-      <th>Select</th>
-    </tr>
-    <tr>
-      <td class="system-info">
-        <p>Off-Grid Hybrid Energy Storage System with 2kW 24V Inverter, 3.0/4.2kWh AGM Batteries, and (optionally) 1.0kW Solar Panels</p>
-        <img src="https://www.energian.co.uk/cdn/shop/files/Off-gridESS_119dbfa8-b5bf-43b7-b8bb-4474d9520992.jpg?v=1715005138" alt="Off-Grid Hybrid Energy Storage System">
-      </td>
-      <td>3000</td>
-      <td>5000</td>
-      <td><input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)"></td>
-    </tr>
-    <tr>
-      <td class="system-info">
-        <p>Off-Grid Hybrid Energy Storage System with Growatt 3.5kW Inverter, 5.12kWh Lithium Batteries, and (optionally) 1.2kW Solar Panels</p>
-        <img src="https://www.energian.co.uk/cdn/shop/files/GrowattOff-gridEss_720x.png?v=1719240917" alt="Growatt Off-Grid Hybrid Energy Storage System">
-      </td>
-      <td>3500</td>
-      <td>5120</td>
-      <td><input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)"></td>
-    </tr>
-  </table>
+  <div class="content-container">
+    <div class="left-section">
+      <table>
+        <tr>
+          <th>System</th>
+          <th>Solar (W)</th>
+          <th>Battery (Wh)</th>
+          <th>Select</th>
+        </tr>
+        <tr>
+          <td class="system-info">
+            <p>Off-Grid Hybrid Energy Storage System with 2kW 24V Inverter, 3.0/4.2kWh AGM Batteries, and (optionally) 1.0kW Solar Panels</p>
+            <img src="https://www.energian.co.uk/cdn/shop/files/Off-gridESS_119dbfa8-b5bf-43b7-b8bb-4474d9520992.jpg?v=1715005138" alt="Off-Grid Hybrid Energy Storage System">
+          </td>
+          <td>3000</td>
+          <td>5000</td>
+          <td><input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)"></td>
+        </tr>
+        <tr>
+          <td class="system-info">
+            <p>Off-Grid Hybrid Energy Storage System with Growatt 3.5kW Inverter, 5.12kWh Lithium Batteries, and (optionally) 1.2kW Solar Panels</p>
+            <img src="https://www.energian.co.uk/cdn/shop/files/GrowattOff-gridEss_720x.png?v=1719240917" alt="Growatt Off-Grid Hybrid Energy Storage System">
+          </td>
+          <td>3500</td>
+          <td>5120</td>
+          <td><input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)"></td>
+        </tr>
+      </table>
+    </div>
 
-  <label for="county">Select County:</label>
-  <select id="county">
-    <option value="51.5074,-0.1278">Greater London</option>
-    <option value="53.8008,-1.5491">West Yorkshire</option>
-    <option value="52.4862,-1.8904">West Midlands</option>
-    <option value="53.4084,-2.9916">Merseyside</option>
-    <option value="53.3811,-1.4701">South Yorkshire</option>
-    <option value="52.2053,0.1218">Cambridgeshire</option>
-    <option value="50.7192,-1.8808">Dorset</option>
-    <option value="52.9548,-1.1581">Nottinghamshire</option>
-    <option value="51.4545,-2.5879">Bristol</option>
-    <option value="51.8657,-2.2431">Gloucestershire</option>
-    <option value="53.8008,-1.5491">Leeds</option>
-    <option value="51.5074,-0.1278">Greater London</option>
-    <option value="51.5074,-0.1278">Middlesex</option>
-    <option value="50.3755,-4.1427">Devon</option>
-    <option value="54.9783,-1.6174">Tyne and Wear</option>
-    <option value="51.5079,-0.0877">City of London</option>
-    <option value="51.4816,-3.1791">Cardiff</option>
-    <option value="53.4723,-2.2935">Greater Manchester</option>
-    <option value="51.7520,-1.2577">Oxfordshire</option>
-    <option value="50.7184,-3.5339">Exeter</option>
-    <option value="53.483959,-2.244644">Lancashire</option>
-    <option value="54.5973,-5.9301">Belfast</option>
-    <option value="52.1920,-2.2217">Worcestershire</option>
-    <option value="55.9533,-3.1883">Edinburgh</option>
-    <option value="52.4068,-1.5197">Warwickshire</option>
-    <option value="52.3555,-1.1743">Northamptonshire</option>
-    <option value="51.4545,-2.5879">Somerset</option>
-    <option value="51.2389,-0.5669">Surrey</option>
-    <option value="53.8008,-1.5491">West Yorkshire</option>
-    <option value="51.5074,-0.1278">Essex</option>
-    <option value="53.7632,-2.7031">Lancashire</option>
-    <option value="52.6297,-1.1398">Leicester</option>
-    <option value="53.4084,-2.9916">Liverpool</option>
-    <option value="53.483959,-2.244644">Manchester</option>
-    <option value="53.8122,-3.0507">Blackpool</option>
-    <option value="54.9783,-1.6174">Newcastle upon Tyne</option>
-    <option value="51.6214,-3.9436">Swansea</option>
-    <option value="55.3781,-3.4360">Scotland</option>
-    <option value="53.2276,-0.5406">Lincolnshire</option>
-    <option value="54.3225,-2.7517">Cumbria</option>
-    <option value="51.4816,-3.1791">Wales</option>
-    <option value="54.7877,-1.5772">Durham</option>
-    <option value="51.4545,-0.9781">Reading</option>
-    <option value="53.835,-1.7767">Bradford</option>
-    <option value="54.9085,-1.3833">Sunderland</option>
-    <option value="51.898,-2.0782">Cheltenham</option>
-    <option value="51.7323,-1.2684">Oxford</option>
-    <option value="54.5666,-1.1622">Middlesbrough</option>
-    <option value="51.4816,-3.1791">Newport</option>
-    <option value="51.812,-1.2591">Abingdon</option>
-  </select><br>
+    <div class="form-section">
+      <div class="form-left">
+        <label for="county">Select County:</label>
+        <select id="county">
+          <option value="51.5074,-0.1278">Greater London</option>
+          <option value="53.8008,-1.5491">West Yorkshire</option>
+          <!-- Add other counties here -->
+        </select><br>
 
-  <label for="angle">Angle (degrees):</label>
-  <select id="angle">
-    <option value="0">0°</option>
-    <option value="20">20°</option>
-    <option value="35">35°</option>
-  </select><br>
+        <label for="angle">Angle (degrees):</label>
+        <select id="angle">
+          <option value="0">0°</option>
+          <option value="20">20°</option>
+          <option value="35">35°</option>
+        </select><br>
 
-  <label for="azimuth">Azimuth (degrees):</label>
-  <input type="text" id="azimuth" placeholder="Enter azimuth (aspect)"><br>
+        <label for="azimuth">Azimuth (degrees):</label>
+        <input type="text" id="azimuth" placeholder="Enter azimuth (aspect)"><br>
+      </div>
 
-  <label for="consumptionday">Consumption per Day (Wh):</label>
-  <input type="text" id="consumptionday" placeholder="Enter consumption per day"><br>
-  <p class="advice-link">
-    For advice on average gas and electricity usage: 
-    <a href="https://www.ofgem.gov.uk/average-gas-and-electricity-usage" target="_blank">https://www.ofgem.gov.uk/average-gas-and-electricity-usage</a>
-  </p>
+      <div class="form-right">
+        <label for="consumptionday">Consumption per Day (Wh):</label>
+        <input type="text" id="consumptionday" placeholder="Enter consumption per day"><br>
 
-  <label for="cutoff">Cutoff:</label>
-  <input type="text" id="cutoff" placeholder="Enter cutoff"><br>
+        <p class="advice-link">
+          For advice on average gas and electricity usage: 
+          <a href="https://www.ofgem.gov.uk/average-gas-and-electricity-usage" target="_blank">https://www.ofgem.gov.uk/average-gas-and-electricity-usage</a>
+        </p>
 
-  <button id="submitButton">Submit</button>
+        <label for="cutoff">Cutoff:</label>
+        <input type="text" id="cutoff" placeholder="Enter cutoff"><br>
 
-  <!-- Chart container with "Change" button and canvas for the chart -->
-  <div id="pvgisResponse">
-    <button id="changeButton">Change</button>
-    <canvas id="chartCanvas"></canvas>
+        <button id="submitButton">Submit</button>
+      </div>
+    </div>
   </div>
 
-  <div id="pvgisResponseText"></div>
+  <!-- Chart container -->
+  <div id="pvgisResponse">
+    <canvas id="chartCanvas"></canvas>
+  </div>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
