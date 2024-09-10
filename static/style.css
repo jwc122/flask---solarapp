@@ -43,6 +43,20 @@
   width: 33.33%; /* Set width to 1/3 of the page */
 }
 
+/* Flexbox for aligning select title and checkboxes */
+.select-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.select-container h3 {
+  margin-right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; /* Same font size as everything else */
+}
+
 .system-info-container {
   display: flex;
   flex-direction: column;
@@ -51,9 +65,16 @@
 .system-row {
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Vertically center items in each row */
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
+}
+
+/* System title styling */
+.system-title {
+  flex: 0.5;
+  text-align: center;
 }
 
 .system-details {
@@ -62,13 +83,28 @@
 
 /* Resize image to 5x the previous size */
 .system-details img {
-  width: 62.5%; /* 5x larger than the previous 12.5% (1/8) */
+  width: 62.5%; /* 5x larger than the previous 12.5% */
   height: auto; /* Maintain aspect ratio */
 }
 
+/* Spec titles (Solar and Battery) and values (3000 and 5000) aligned vertically */
 .system-specs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex: 1;
   text-align: left;
+}
+
+.spec-titles {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.spec-values {
+  display: flex;
+  justify-content: space-between;
 }
 
 .system-select {
