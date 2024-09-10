@@ -15,32 +15,34 @@
 
   <div class="content-container">
     <div class="left-section">
-      <table>
-        <tr>
-          <th>System</th>
-          <th>Solar (W)</th>
-          <th>Battery (Wh)</th>
-          <th>Select</th>
-        </tr>
-        <tr>
-          <td class="system-info">
-            <p>Off-Grid Hybrid Energy Storage System with 2kW 24V Inverter, 3.0/4.2kWh AGM Batteries, and (optionally) 1.0kW Solar Panels</p>
+      <h3>Select</h3> <!-- Title for the checkboxes -->
+      <!-- System Information without the description text -->
+      <div class="system-info-container">
+        <div class="system-row">
+          <div class="system-details">
             <img src="https://www.energian.co.uk/cdn/shop/files/Off-gridESS_119dbfa8-b5bf-43b7-b8bb-4474d9520992.jpg?v=1715005138" alt="Off-Grid Hybrid Energy Storage System">
-          </td>
-          <td>3000</td>
-          <td>5000</td>
-          <td><input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)"></td>
-        </tr>
-        <tr>
-          <td class="system-info">
-            <p>Off-Grid Hybrid Energy Storage System with Growatt 3.5kW Inverter, 5.12kWh Lithium Batteries, and (optionally) 1.2kW Solar Panels</p>
+          </div>
+          <div class="system-specs">
+            <p>Solar (W): 3000</p>
+            <p>Battery (Wh): 5000</p>
+          </div>
+          <div class="system-select">
+            <input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)">
+          </div>
+        </div>
+        <div class="system-row">
+          <div class="system-details">
             <img src="https://www.energian.co.uk/cdn/shop/files/GrowattOff-gridEss_720x.png?v=1719240917" alt="Growatt Off-Grid Hybrid Energy Storage System">
-          </td>
-          <td>3500</td>
-          <td>5120</td>
-          <td><input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)"></td>
-        </tr>
-      </table>
+          </div>
+          <div class="system-specs">
+            <p>Solar (W): 3500</p>
+            <p>Battery (Wh): 5120</p>
+          </div>
+          <div class="system-select">
+            <input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)">
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="form-section">
