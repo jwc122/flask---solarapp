@@ -115,12 +115,12 @@ function displayRelevantData(data) {
         {
           label: 'E_d (Wh/d)',
           data: E_d_values,
-          backgroundColor: 'rgba(54, 162, 235, 0.5)'
+          backgroundColor: 'rgba(255, 149, 0, 0.5)'  // 50% transparent FF9500
         },
         {
           label: 'E_lost_d (Wh/d)',
           data: E_lost_d_values,
-          backgroundColor: 'rgba(255, 99, 132, 0.5)'
+          backgroundColor: 'rgba(0, 0, 0, 0.5)'  // 50% transparent black
         }
       ]
     },
@@ -149,12 +149,12 @@ function displayRelevantData(data) {
             {
               label: 'f_f (%)',
               data: f_f_values,
-              backgroundColor: 'rgba(75, 192, 192, 0.5)'
+              backgroundColor: 'rgba(255, 149, 0, 0.5)'  // 50% transparent FF9500
             },
             {
               label: 'f_e (%)',
               data: f_e_values,
-              backgroundColor: 'rgba(153, 102, 255, 0.5)'
+              backgroundColor: 'rgba(0, 0, 0, 0.5)'  // 50% transparent black
             }
           ]
         },
@@ -177,12 +177,12 @@ function displayRelevantData(data) {
             {
               label: 'E_d (Wh/d)',
               data: E_d_values,
-              backgroundColor: 'rgba(54, 162, 235, 0.5)'
+              backgroundColor: 'rgba(255, 149, 0, 0.5)'  // 50% transparent FF9500
             },
             {
               label: 'E_lost_d (Wh/d)',
               data: E_lost_d_values,
-              backgroundColor: 'rgba(255, 99, 132, 0.5)'
+              backgroundColor: 'rgba(0, 0, 0, 0.5)'  // 50% transparent black
             }
           ]
         },
