@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <!-- Title at the top -->
   <div class="hero18">
     <div class="power-production-and1">
       Power Production and Battery Performance Location Calculator
@@ -14,72 +15,13 @@
   </div>
 
   <div class="content-container">
-    <div class="left-section">
-      <!-- Flex container to align the Select title with checkboxes -->
-      <div class="select-container">
-        <h3>Select</h3> <!-- Title for the checkboxes -->
-      </div>
-      <!-- System Information with updated structure -->
-      <div class="system-info-container">
-        <div class="system-row">
-          <!-- Title for the system -->
-          <div class="system-title">
-            <h3>System</h3>
-          </div>
-          <div class="system-details">
-            <img src="https://www.energian.co.uk/cdn/shop/files/Off-gridESS_119dbfa8-b5bf-43b7-b8bb-4474d9520992.jpg?v=1715005138" alt="Off-Grid Hybrid Energy Storage System">
-          </div>
-          <div class="system-specs">
-            <!-- Solar and Battery Titles -->
-            <div class="spec-titles">
-              <p>Solar (W)</p>
-              <p>Battery (Wh)</p>
-            </div>
-            <!-- Solar and Battery Values -->
-            <div class="spec-values">
-              <p>3000</p>
-              <p>5000</p>
-            </div>
-          </div>
-          <div class="system-select">
-            <input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)">
-          </div>
-        </div>
-
-        <div class="system-row">
-          <!-- Title for the system -->
-          <div class="system-title">
-            <h3>System</h3>
-          </div>
-          <div class="system-details">
-            <img src="https://www.energian.co.uk/cdn/shop/files/GrowattOff-gridEss_720x.png?v=1719240917" alt="Growatt Off-Grid Hybrid Energy Storage System">
-          </div>
-          <div class="system-specs">
-            <!-- Solar and Battery Titles -->
-            <div class="spec-titles">
-              <p>Solar (W)</p>
-              <p>Battery (Wh)</p>
-            </div>
-            <!-- Solar and Battery Values -->
-            <div class="spec-values">
-              <p>3500</p>
-              <p>5120</p>
-            </div>
-          </div>
-          <div class="system-select">
-            <input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)">
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <!-- Form section moved to top left -->
     <div class="form-section">
       <div class="form-left">
         <label for="county">Select County:</label>
         <select id="county">
           <option value="51.5074,-0.1278">Greater London</option>
           <option value="53.8008,-1.5491">West Yorkshire</option>
-          <!-- Add other counties here -->
         </select><br>
 
         <label for="angle">Angle (degrees):</label>
@@ -108,11 +50,58 @@
         <button id="submitButton">Submit</button>
       </div>
     </div>
+
+    <!-- Chart container moved to top right -->
+    <div id="pvgisResponse">
+      <canvas id="chartCanvas"></canvas>
+    </div>
   </div>
 
-  <!-- Chart container -->
-  <div id="pvgisResponse">
-    <canvas id="chartCanvas"></canvas>
+  <!-- System section moved to the bottom of the page -->
+  <div class="system-section">
+    <div class="system-title">
+      <h3>System Information</h3>
+    </div>
+    
+    <div class="system-info-container">
+      <div class="system-row">
+        <div class="system-details">
+          <img src="https://www.energian.co.uk/cdn/shop/files/Off-gridESS_119dbfa8-b5bf-43b7-b8bb-4474d9520992.jpg?v=1715005138" alt="Off-Grid Hybrid Energy Storage System">
+        </div>
+        <div class="system-specs">
+          <div class="spec-titles">
+            <p>Solar (W)</p>
+            <p>Battery (Wh)</p>
+          </div>
+          <div class="spec-values">
+            <p>3000</p>
+            <p>5000</p>
+          </div>
+        </div>
+        <div class="system-select">
+          <input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)">
+        </div>
+      </div>
+
+      <div class="system-row">
+        <div class="system-details">
+          <img src="https://www.energian.co.uk/cdn/shop/files/GrowattOff-gridEss_720x.png?v=1719240917" alt="Growatt Off-Grid Hybrid Energy Storage System">
+        </div>
+        <div class="system-specs">
+          <div class="spec-titles">
+            <p>Solar (W)</p>
+            <p>Battery (Wh)</p>
+          </div>
+          <div class="spec-values">
+            <p>3500</p>
+            <p>5120</p>
+          </div>
+        </div>
+        <div class="system-select">
+          <input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)">
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='script.js') }}"></script>

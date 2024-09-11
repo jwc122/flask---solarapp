@@ -3,7 +3,7 @@
   --padding-mini: 10px;  /* Replace with your desired padding */
 }
 
-/* Styling for the title */
+/* Title styling */
 .power-production-and1 {
   width: 676.6px;
   position: relative;
@@ -15,6 +15,7 @@
   font-size: 24px;
 }
 
+/* Background section for title */
 .hero18 {
   align-self: stretch;
   border-radius: 6.01px;
@@ -30,70 +31,69 @@
   max-width: 100%;
 }
 
-/* Content layout */
+/* Main content layout */
 .content-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  margin: 20px;
+  padding: 20px;
 }
 
-/* System Info Layout */
-.left-section {
-  width: 33.33%; /* Set width to 1/3 of the page */
-}
-
-/* Flexbox for aligning select title and checkboxes */
-.select-container {
+/* Form section placed on the top-left */
+.form-section {
+  width: 45%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
 }
 
-.select-container h3 {
-  margin-right: 10px;
+/* Form left and right columns */
+.form-left, .form-right {
+  width: 48%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px; /* Same font size as everything else */
+  font-size: 16px;
+}
+
+/* Chart container moved to the top-right */
+#pvgisResponse {
+  width: 50%;
+  height: 300px;
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#chartCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* System section at the bottom */
+.system-section {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.system-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .system-info-container {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .system-row {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Vertically center items in each row */
+  align-items: center;
   margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
 }
 
-/* System title styling */
-.system-title {
-  flex: 0.5;
-  text-align: center;
-}
-
-.system-details {
-  flex: 2;
-}
-
-/* Resize image to 5x the previous size */
 .system-details img {
-  width: 62.5%; /* 5x larger than the previous 12.5% */
-  height: auto; /* Maintain aspect ratio */
-}
-
-/* Spec titles (Solar and Battery) and values (3000 and 5000) aligned vertically */
-.system-specs {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-  text-align: left;
+  width: 62.5%; /* Adjust image size */
+  height: auto;
 }
 
 .spec-titles {
@@ -108,54 +108,5 @@
 }
 
 .system-select {
-  flex: 0.5;
   text-align: center;
-}
-
-/* Form section styling */
-.form-section {
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Form left and right columns */
-.form-left, .form-right {
-  width: 48%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-}
-
-.form-left label, .form-right label {
-  display: block;
-  margin: 10px 0 5px;
-}
-
-.form-left input, .form-right input, .form-left select, .form-right select {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-/* Chart and form container */
-#pvgisResponse {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 45%;
-  height: 300px;
-  background-color: #ffffff;
-  padding: 20px;
-  box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-#chartCanvas {
-  width: 100%;
-  height: 100%;
-}
-
-/* Add bottom padding to prevent overlap */
-body {
-  padding-bottom: 320px;
 }
