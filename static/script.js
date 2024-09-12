@@ -27,6 +27,7 @@ function toggleBattery(spanId, value1, value2) {
   span.innerText = span.innerText === value1 ? value2 : value1;
 }
 
+
 function callApi() {
   const countyCoordinates = document.getElementById("county").value;
   const [lat, lon] = countyCoordinates.split(',');

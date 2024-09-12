@@ -66,48 +66,13 @@
     </div>
 
     <div class="tables-container">
-      <!-- First Table -->
+      <!-- First Table (Left Table with 8 items) -->
       <table>
         <thead>
           <tr>
             <th>Inverter Brand</th>
             <th>Battery Type (AGM/Lithium)</th>
-            <th>Battery (kWh)</th>
-            <th>Solar (W)</th>
-            <th>Inverter (W)</th>
-            <th>Price</th>
-            <th>Select</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>SMA</td>
-            <td>Lithium</td>
-            <td>10</td>
-            <td>3000</td>
-            <td>5000</td>
-            <td>£4500</td>
-            <td><input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)"></td>
-          </tr>
-          <tr>
-            <td>Fronius</td>
-            <td>AGM</td>
-            <td>8</td>
-            <td>3500</td>
-            <td>4000</td>
-            <td>£4000</td>
-            <td><input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)"></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Second Table -->
-      <table>
-        <thead>
-          <tr>
-            <th>Inverter Brand</th>
-            <th>Battery Type (AGM/Lithium)</th>
-            <th>Battery (kWh)</th>
+            <th>Battery (Wh)</th>
             <th>Solar (W)</th>
             <th>Inverter (W)</th>
             <th>Price</th>
@@ -118,23 +83,40 @@
           <tr>
             <td>BLUETTI</td>
             <td>Lithium</td>
-            <td>5.1</td>
+            <td>5100</td>
             <td>3000</td>
             <td>3000</td>
             <td>£3,999.00</td>
-            <td><input type="checkbox" id="selectSystem3" onchange="updateApiValues(3)"></td>
+            <td><input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)"></td>
           </tr>
+          <!-- Add remaining rows from the data processed above -->
+        </tbody>
+      </table>
+
+      <!-- Second Table (Right Table with 7 items) -->
+      <table>
+        <thead>
+          <tr>
+            <th>Inverter Brand</th>
+            <th>Battery Type (AGM/Lithium)</th>
+            <th>Battery (Wh)</th>
+            <th>Solar (W)</th>
+            <th>Inverter (W)</th>
+            <th>Price</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+        <tbody>
           <tr>
             <td>Off-Grid Hybrid</td>
-            <td>AGM</td>
-            <td><span id="batterySwitch1">3.0</span><button onclick="toggleBattery('batterySwitch1', '3.0', '4.2')">⇆</button></td>
-            <td>1000</td>
-            <td>2000</td>
-            <td>From £1,205.00</td>
-            <td><input type="checkbox" id="selectSystem4" onchange="updateApiValues(4)"></td>
+            <td>Lithium-Ion</td>
+            <td><span id="batterySwitch1">14400</span><button onclick="toggleBattery('batterySwitch1', '14400', '19200')">⇆</button></td>
+            <td>10000</td>
+            <td>11000</td>
+            <td>From £6,337.84</td>
+            <td><input type="checkbox" id="selectSystem9" onchange="updateApiValues(9)"></td>
           </tr>
-          <!-- Repeat for other entries -->
-          <!-- Add more rows similar to the above, toggling battery values with the button and ID -->
+          <!-- Add remaining rows from the data processed above -->
         </tbody>
       </table>
     </div>
