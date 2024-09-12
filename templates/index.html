@@ -15,39 +15,41 @@
   </div>
 
   <div class="content-container">
-    <!-- Form section moved to top left -->
-    <div class="form-section">
-      <div class="form-left">
-        <label for="county">Select County:</label>
-        <select id="county">
-          <option value="51.5074,-0.1278">Greater London</option>
-          <option value="53.8008,-1.5491">West Yorkshire</option>
-        </select><br>
+    <!-- Form container with same style as graph container -->
+    <div class="form-container">
+      <div class="form-section">
+        <div class="form-left">
+          <label for="county">Select County:</label>
+          <select id="county">
+            <option value="51.5074,-0.1278">Greater London</option>
+            <option value="53.8008,-1.5491">West Yorkshire</option>
+          </select><br>
 
-        <label for="angle">Angle (degrees):</label>
-        <select id="angle">
-          <option value="0">0°</option>
-          <option value="20">20°</option>
-          <option value="35">35°</option>
-        </select><br>
+          <label for="angle">Angle (degrees):</label>
+          <select id="angle">
+            <option value="0">0°</option>
+            <option value="20">20°</option>
+            <option value="35">35°</option>
+          </select><br>
 
-        <label for="azimuth">Azimuth (degrees):</label>
-        <input type="text" id="azimuth" placeholder="Enter azimuth (aspect)"><br>
-      </div>
+          <label for="azimuth">Azimuth (degrees):</label>
+          <input type="text" id="azimuth" placeholder="Enter azimuth (aspect)"><br>
+        </div>
 
-      <div class="form-right">
-        <label for="consumptionday">Consumption per Day (Wh):</label>
-        <input type="text" id="consumptionday" placeholder="Enter consumption per day"><br>
+        <div class="form-right">
+          <label for="consumptionday">Consumption per Day (Wh):</label>
+          <input type="text" id="consumptionday" placeholder="Enter consumption per day"><br>
 
-        <p class="advice-link">
-          For advice on average gas and electricity usage: 
-          <a href="https://www.ofgem.gov.uk/average-gas-and-electricity-usage" target="_blank">https://www.ofgem.gov.uk/average-gas-and-electricity-usage</a>
-        </p>
+          <p class="advice-link">
+            For advice on average gas and electricity usage: 
+            <a href="https://www.ofgem.gov.uk/average-gas-and-electricity-usage" target="_blank">https://www.ofgem.gov.uk/average-gas-and-electricity-usage</a>
+          </p>
 
-        <label for="cutoff">Cutoff:</label>
-        <input type="text" id="cutoff" placeholder="Enter cutoff"><br>
+          <label for="cutoff">Cutoff:</label>
+          <input type="text" id="cutoff" placeholder="Enter cutoff"><br>
 
-        <button id="submitButton">Submit</button>
+          <button id="submitButton">Calculate</button> <!-- Changed text from Submit to Calculate -->
+        </div>
       </div>
     </div>
 
@@ -57,44 +59,84 @@
     </div>
   </div>
 
-  <!-- System section moved to the bottom of the page -->
+  <!-- System section with two tables next to each other -->
   <div class="system-section">
     <div class="system-title">
       <h3>System Information</h3>
     </div>
-    
-    <div class="system-info-container">
-      <div class="system-row">
-        <div class="system-specs">
-          <div class="spec-titles">
-            <p>Solar (W)</p>
-            <p>Battery (Wh)</p>
-          </div>
-          <div class="spec-values">
-            <p>3000</p>
-            <p>5000</p>
-          </div>
-        </div>
-        <div class="system-select">
-          <input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)">
-        </div>
-      </div>
 
-      <div class="system-row">
-        <div class="system-specs">
-          <div class="spec-titles">
-            <p>Solar (W)</p>
-            <p>Battery (Wh)</p>
-          </div>
-          <div class="spec-values">
-            <p>3500</p>
-            <p>5120</p>
-          </div>
-        </div>
-        <div class="system-select">
-          <input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)">
-        </div>
-      </div>
+    <div class="tables-container">
+      <!-- First Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Inverter Brand</th>
+            <th>Battery Type (AGM/Lithium)</th>
+            <th>Battery (kWh)</th>
+            <th>Solar (W)</th>
+            <th>Inverter (W)</th>
+            <th>Price</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SMA</td>
+            <td>Lithium</td>
+            <td>10</td>
+            <td>3000</td>
+            <td>5000</td>
+            <td>£4500</td>
+            <td><input type="checkbox" id="selectSystem1" onchange="updateApiValues(1)"></td>
+          </tr>
+          <tr>
+            <td>Fronius</td>
+            <td>AGM</td>
+            <td>8</td>
+            <td>3500</td>
+            <td>4000</td>
+            <td>£4000</td>
+            <td><input type="checkbox" id="selectSystem2" onchange="updateApiValues(2)"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Second Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Inverter Brand</th>
+            <th>Battery Type (AGM/Lithium)</th>
+            <th>Battery (kWh)</th>
+            <th>Solar (W)</th>
+            <th>Inverter (W)</th>
+            <th>Price</th>
+            <th>Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BLUETTI</td>
+            <td>Lithium</td>
+            <td>5.1</td>
+            <td>3000</td>
+            <td>3000</td>
+            <td>£3,999.00</td>
+            <td><input type="checkbox" id="selectSystem3" onchange="updateApiValues(3)"></td>
+          </tr>
+          <tr>
+            <td>Off-Grid Hybrid</td>
+            <td>AGM</td>
+            <td><span id="batterySwitch1">3.0</span><button onclick="toggleBattery('batterySwitch1', '3.0', '4.2')">⇆</button></td>
+            <td>1000</td>
+            <td>2000</td>
+            <td>From £1,205.00</td>
+            <td><input type="checkbox" id="selectSystem4" onchange="updateApiValues(4)"></td>
+          </tr>
+          <!-- Repeat for other entries -->
+          <!-- Add more rows similar to the above, toggling battery values with the button and ID -->
+        </tbody>
+      </table>
     </div>
   </div>
 

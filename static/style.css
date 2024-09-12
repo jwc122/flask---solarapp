@@ -1,5 +1,7 @@
 :root {
-  --accent-15: rgba(255, 149, 0, 0.15); /* 15% transparency of #FF9500 */
+  --accent-15: rgba(255, 149, 0, 0.15); /* 15% transparency for title background */
+  --accent-10: rgba(255, 149, 0, 0.10); /* 10% transparency for containers */
+  --accent-50: rgba(255, 149, 0, 0.50); /* 50% transparency for button */
   --padding-mini: 10px;  /* Replace with your desired padding */
 }
 
@@ -15,11 +17,11 @@
   font-size: 24px;
 }
 
-/* Background section for title */
+/* Background section for title with 15% transparency */
 .hero18 {
   align-self: stretch;
   border-radius: 6px;
-  background-color: var(--accent-15); /* Title background */
+  background-color: var(--accent-15); /* 15% transparency for title */
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -38,25 +40,64 @@
   padding: 20px;
 }
 
-/* Form section placed on the top-left */
-.form-section {
+/* Form container styled with 10% transparency */
+.form-container {
   width: 45%;
+  background-color: var(--accent-10); /* 10% transparency for form container */
+  padding: 20px;
+  border-radius: 6px; /* Same border-radius as graph container */
+  box-sizing: border-box;
+}
+
+/* Form section layout inside the container */
+.form-section {
   display: flex;
   justify-content: space-between;
 }
 
-/* Form left and right columns */
 .form-left, .form-right {
   width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
 }
 
-/* Chart container moved to the top-right */
+/* Input fields without borders and white background */
+input[type="text"], select {
+  border: none;
+  background-color: white;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+button#submitButton {
+  background-color: var(--accent-50); /* 50% transparency orange */
+  color: white;
+  border: none; /* No border */
+  padding: 10px 20px;
+  border-radius: 6px; /* Smooth corners */
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button#submitButton:hover {
+  background-color: rgba(255, 149, 0, 0.75); /* Darker on hover */
+}
+
+/* Adjust advice link and form fields */
+.advice-link {
+  margin-top: 30px; /* Align Angle with advice link */
+}
+
+/* Chart container with 10% transparency */
 #pvgisResponse {
   width: 50%;
   height: auto;
-  background-color: var(--accent-15); /* Match title background color */
+  background-color: var(--accent-10); /* 10% transparency for chart container */
   padding: 20px;
   border-radius: 6px; /* Independent corner radius */
   box-sizing: border-box;
@@ -107,3 +148,78 @@
 .system-select {
   text-align: center;
 }
+
+/* Style the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead th {
+  text-align: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tbody td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Style the checkbox column */
+tbody td:last-child, thead th:last-child {
+  text-align: center;
+}
+
+/* Style the table headers */
+th, td {
+  vertical-align: middle;
+}
+
+/* Style the table */
+table {
+  width: 48%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead th {
+  text-align: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tbody td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Style the checkbox column */
+tbody td:last-child, thead th:last-child {
+  text-align: center;
+}
+
+/* Style the table headers */
+th, td {
+  vertical-align: middle;
+}
+
+/* Container to display tables side by side */
+.tables-container {
+  display: flex;
+  justify-content: space-between;
+}
+

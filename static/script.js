@@ -1,26 +1,30 @@
 function updateApiValues(systemId) {
-  const checkbox1 = document.getElementById("selectSystem1");
-  const checkbox2 = document.getElementById("selectSystem2");
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-  if (systemId === 1) {
-    if (checkbox1.checked) {
-      checkbox2.checked = false;
-      document.getElementById("peakpower").value = "3000";
-      document.getElementById("batterysize").value = "5000";
-    } else {
-      document.getElementById("peakpower").value = "";
-      document.getElementById("batterysize").value = "";
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.id !== `selectSystem${systemId}`) {
+      checkbox.checked = false;
     }
-  } else if (systemId === 2) {
-    if (checkbox2.checked) {
-      checkbox1.checked = false;
-      document.getElementById("peakpower").value = "3500";
-      document.getElementById("batterysize").value = "5120";
-    } else {
-      document.getElementById("peakpower").value = "";
-      document.getElementById("batterysize").value = "";
-    }
+  });
+
+  const batteryValue = document.getElementById(`batterySwitch${systemId}`) ? 
+      document.getElementById(`batterySwitch${systemId}`).innerText : "";
+
+  if (batteryValue) {
+    document.getElementById("batterysize").value = batteryValue;
   }
+  
+  if (systemId === 1) {
+    document.getElementById("peakpower").value = "3000";
+  } else if (systemId === 2) {
+    document.getElementById("peakpower").value = "3500";
+  }
+  // Add further logic for other systems
+}
+
+function toggleBattery(spanId, value1, value2) {
+  const span = document.getElementById(spanId);
+  span.innerText = span.innerText === value1 ? value2 : value1;
 }
 
 function callApi() {
