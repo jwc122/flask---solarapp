@@ -1,6 +1,7 @@
 function updateApiValues(systemId) {
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
+  // Uncheck other systems if this system is selected
   checkboxes.forEach((checkbox) => {
     if (checkbox.id !== `selectSystem${systemId}`) {
       checkbox.checked = false;
@@ -11,21 +12,29 @@ function updateApiValues(systemId) {
       document.getElementById(`batterySwitch${systemId}`).innerText : "";
 
   if (batteryValue) {
-    document.getElementById("batterysize").value = batteryValue;
+    document.getElementById("batterysize").value = batteryValue; // Make sure battery size is correctly set
   }
   
-  if (systemId === 1) {
-    document.getElementById("peakpower").value = "3000";
-  } else if (systemId === 2) {
-    document.getElementById("peakpower").value = "3500";
+  if (systemId === 9) { // Off-Grid Hybrid
+    document.getElementById("peakpower").value = "11000"; // Set Off-Grid Hybrid peak power
+  } else if (systemId === 1) {
+    document.getElementById("peakpower").value = "3000"; // Example for another system
   }
-  // Add further logic for other systems
+  // Add logic for other systems if necessary
 }
+
 
 function toggleBattery(spanId, value1, value2) {
   const span = document.getElementById(spanId);
-  span.innerText = span.innerText === value1 ? value2 : value1;
+  const newValue = span.innerText === value1 ? value2 : value1;
+  
+  // Update the displayed value
+  span.innerText = newValue;
+
+  // Update the hidden input field for battery size
+  document.getElementById("batterysize").value = newValue;
 }
+
 
 
 function callApi() {
