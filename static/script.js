@@ -8,15 +8,23 @@ function updateApiValues(systemId) {
     }
   });
 
-  // Define battery and peak power values for each system dynamically
+  // Define battery and peak power values for all 15 systems
   const systemConfig = {
-    1: { battery: "5100", peakpower: "3000" },   // BLUETTI
-    2: { battery: "3000", peakpower: "1000" },   // Off-Grid Hybrid 1
-    3: { battery: "4200", peakpower: "4000" },   // Off-Grid Hybrid 2
-    4: { battery: "6000", peakpower: "6000" },   // Off-Grid Hybrid 3
-    5: { battery: "7000", peakpower: "6000" },   // Off-Grid Hybrid 4
-    9: { battery: "14400", peakpower: "11000" }, // Special Off-Grid Hybrid (System 9)
-    // Add more configurations if needed for additional rows
+    1: { battery: "5100", peakpower: "3000" },
+    2: { battery: "3000", peakpower: "1000" },
+    3: { battery: "4200", peakpower: "4000" },
+    4: { battery: "6000", peakpower: "6000" },
+    5: { battery: "7000", peakpower: "6000" },
+    6: { battery: "8000", peakpower: "7000" },
+    7: { battery: "9000", peakpower: "8000" },
+    8: { battery: "4200", peakpower: "4000" },
+    9: { battery: "7000", peakpower: "6000" },
+    10: { battery: "8000", peakpower: "7000" },
+    11: { battery: "9000", peakpower: "8000" },
+    12: { battery: "10000", peakpower: "9000" },
+    13: { battery: "11000", peakpower: "10000" },
+    14: { battery: "12000", peakpower: "11000" },
+    15: { battery: "13000", peakpower: "12000" }
   };
 
   // Update the battery size and peak power based on the selected system
@@ -27,6 +35,7 @@ function updateApiValues(systemId) {
     console.error('System ID not found or configured:', systemId);
   }
 }
+
 
 
 function callApi() {
