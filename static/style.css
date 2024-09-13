@@ -2,6 +2,7 @@
   --accent-15: rgba(255, 149, 0, 0.15); /* 15% transparency for title background */
   --accent-10: rgba(255, 149, 0, 0.10); /* 10% transparency for containers */
   --accent-50: rgba(255, 149, 0, 0.50); /* 50% transparency for button */
+  --accent-table-header: rgba(255, 149, 0, 0.10); /* 10% transparency for table headers */
   --padding-mini: 10px;  /* Replace with your desired padding */
 }
 
@@ -15,6 +16,14 @@
   max-width: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 24px;
+}
+
+/* System title styling same as main title */
+.system-title {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 /* Background section for title with 15% transparency */
@@ -99,7 +108,7 @@ button#submitButton:hover {
   height: auto;
   background-color: var(--accent-10); /* 10% transparency for chart container */
   padding: 20px;
-  border-radius: 6px; /* Independent corner radius */
+  border-radius: 6px;
   box-sizing: border-box;
 }
 
@@ -109,16 +118,10 @@ button#submitButton:hover {
   background-color: #ffffff; /* Keep chart background white */
 }
 
-/* System section at the bottom */
+/* System section */
 .system-section {
   margin-top: 50px;
   width: 100%;
-}
-
-.system-title {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
 }
 
 .system-info-container {
@@ -134,68 +137,19 @@ button#submitButton:hover {
   margin-bottom: 20px;
 }
 
-.spec-titles {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-}
-
-.spec-values {
-  display: flex;
-  justify-content: space-between;
-}
-
-.system-select {
-  text-align: center;
-}
-
-/* Style the table */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-thead th {
-  text-align: center;
-  padding: 10px;
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-tbody td {
-  text-align: center;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-tbody tr:hover {
-  background-color: #f9f9f9;
-}
-
-/* Style the checkbox column */
-tbody td:last-child, thead th:last-child {
-  text-align: center;
-}
-
-/* Style the table headers */
-th, td {
-  vertical-align: middle;
-}
-
-/* Font style for tables */
+/* Tables styling */
 table {
   width: 48%;
   border-collapse: collapse;
   margin-top: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px; /* Same as title */
+  font-size: 16px;
 }
 
 thead th {
   text-align: center;
   padding: 10px;
-  background-color: #f2f2f2;
+  background-color: var(--accent-table-header); /* 10% orange for headers */
   font-weight: bold;
 }
 
@@ -209,14 +163,7 @@ tbody tr:hover {
   background-color: #f9f9f9;
 }
 
-/* Style the checkbox column */
-tbody td:last-child, thead th:last-child {
-  text-align: center;
-}
-
-/* Container to display tables side by side */
 .tables-container {
   display: flex;
   justify-content: space-between;
 }
-

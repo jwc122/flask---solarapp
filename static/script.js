@@ -8,33 +8,25 @@ function updateApiValues(systemId) {
     }
   });
 
-  const batteryValue = document.getElementById(`batterySwitch${systemId}`) ? 
-      document.getElementById(`batterySwitch${systemId}`).innerText : "";
+  // Define battery and peak power values for each system dynamically
+  const systemConfig = {
+    1: { battery: "5100", peakpower: "3000" },   // BLUETTI
+    2: { battery: "3000", peakpower: "1000" },   // Off-Grid Hybrid 1
+    3: { battery: "4200", peakpower: "4000" },   // Off-Grid Hybrid 2
+    4: { battery: "6000", peakpower: "6000" },   // Off-Grid Hybrid 3
+    5: { battery: "7000", peakpower: "6000" },   // Off-Grid Hybrid 4
+    9: { battery: "14400", peakpower: "11000" }, // Special Off-Grid Hybrid (System 9)
+    // Add more configurations if needed for additional rows
+  };
 
-  if (batteryValue) {
-    document.getElementById("batterysize").value = batteryValue; // Make sure battery size is correctly set
+  // Update the battery size and peak power based on the selected system
+  if (systemConfig[systemId]) {
+    document.getElementById("batterysize").value = systemConfig[systemId].battery;
+    document.getElementById("peakpower").value = systemConfig[systemId].peakpower;
+  } else {
+    console.error('System ID not found or configured:', systemId);
   }
-  
-  if (systemId === 9) { // Off-Grid Hybrid
-    document.getElementById("peakpower").value = "11000"; // Set Off-Grid Hybrid peak power
-  } else if (systemId === 1) {
-    document.getElementById("peakpower").value = "3000"; // Example for another system
-  }
-  // Add logic for other systems if necessary
 }
-
-
-function toggleBattery(spanId, value1, value2) {
-  const span = document.getElementById(spanId);
-  const newValue = span.innerText === value1 ? value2 : value1;
-  
-  // Update the displayed value
-  span.innerText = newValue;
-
-  // Update the hidden input field for battery size
-  document.getElementById("batterysize").value = newValue;
-}
-
 
 
 function callApi() {
@@ -58,36 +50,41 @@ function callApi() {
     cutoff: cutoff
   };
 
+  console.log("Sending the following data to the API:", postData);
+
   fetch('/fetch_pvgis_data', {
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(postData)
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.error) {
-      document.getElementById("pvgisResponse").innerText = data.error;
-    } else {
-      displayRelevantData(data.data);
-    }
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-    document.getElementById("pvgisResponse").innerText = 'Error fetching data.';
-  });
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.error) {
+        document.getElementById("pvgisResponse").innerText = `Error from PVGIS API: ${data.error}`;
+      } else {
+        displayRelevantData(data.data);
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      document.getElementById("pvgisResponse").innerText = `Error fetching data: ${error.message}. Please ensure that the API endpoint is reachable and the input parameters are valid.`;
+    });
 }
 
 function displayRelevantData(data) {
   const responseDiv = document.getElementById("pvgisResponse");
-
   const monthNames = ["January", "February", "March", "April", "May", "June", 
                       "July", "August", "September", "October", "November", "December"];
 
   const rows = data.trim().split(/\s+/);
 
-  // Arrays to store the values for the charts
   const E_d_values = [];
   const E_lost_d_values = [];
   const f_f_values = [];
@@ -112,7 +109,6 @@ function displayRelevantData(data) {
     }
   }
 
-  // Clear any previous content and set up the charts container
   responseDiv.innerHTML = `
     <button id="changeButton">Change</button>
     <canvas id="chartCanvas" width="400" height="200"></canvas>
@@ -120,7 +116,6 @@ function displayRelevantData(data) {
 
   const ctx = document.getElementById('chartCanvas').getContext('2d');
 
-  // Initialize with the first chart (E_d and E_lost_d)
   let currentChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -129,12 +124,12 @@ function displayRelevantData(data) {
         {
           label: 'E_d (Wh/d)',
           data: E_d_values,
-          backgroundColor: 'rgba(255, 149, 0, 0.5)'  // 50% transparent FF9500
+          backgroundColor: 'rgba(255, 149, 0, 0.5)'
         },
         {
           label: 'E_lost_d (Wh/d)',
           data: E_lost_d_values,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)'  // 50% transparent black
+          backgroundColor: 'rgba(0, 0, 0, 0.5)'
         }
       ]
     },
@@ -148,13 +143,10 @@ function displayRelevantData(data) {
     }
   });
 
-  // Add functionality to the Change button to switch charts
   document.getElementById('changeButton').addEventListener('click', () => {
-    currentChart.destroy();  // Destroy the current chart
+    currentChart.destroy();
 
-    // Toggle between the two charts
     if (currentChart.config.data.datasets[0].label === 'E_d (Wh/d)') {
-      // Switch to the f_f and f_e chart
       currentChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -163,12 +155,12 @@ function displayRelevantData(data) {
             {
               label: 'f_f (%)',
               data: f_f_values,
-              backgroundColor: 'rgba(255, 149, 0, 0.5)'  // 50% transparent FF9500
+              backgroundColor: 'rgba(255, 149, 0, 0.5)'
             },
             {
               label: 'f_e (%)',
               data: f_e_values,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)'  // 50% transparent black
+              backgroundColor: 'rgba(0, 0, 0, 0.5)'
             }
           ]
         },
@@ -182,7 +174,6 @@ function displayRelevantData(data) {
         }
       });
     } else {
-      // Switch back to the E_d and E_lost_d chart
       currentChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -191,12 +182,12 @@ function displayRelevantData(data) {
             {
               label: 'E_d (Wh/d)',
               data: E_d_values,
-              backgroundColor: 'rgba(255, 149, 0, 0.5)'  // 50% transparent FF9500
+              backgroundColor: 'rgba(255, 149, 0, 0.5)'
             },
             {
               label: 'E_lost_d (Wh/d)',
               data: E_lost_d_values,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)'  // 50% transparent black
+              backgroundColor: 'rgba(0, 0, 0, 0.5)'
             }
           ]
         },
@@ -221,7 +212,6 @@ const hiddenInputs = `
 `;
 document.body.insertAdjacentHTML('beforeend', hiddenInputs);
 
-// Load Chart.js library
 const script = document.createElement('script');
 script.src = "https://cdn.jsdelivr.net/npm/chart.js";
 document.head.appendChild(script);
