@@ -37,7 +37,6 @@ function updateApiValues(systemId) {
 }
 
 
-
 function callApi() {
   const countyCoordinates = document.getElementById("county").value;
   const [lat, lon] = countyCoordinates.split(',');
