@@ -45,7 +45,18 @@ function callApi() {
   const azimuth = document.getElementById("azimuth").value;
   const batterysize = document.getElementById("batterysize").value;
   const consumptionday = document.getElementById("consumptionday").value;
-  const cutoff = document.getElementById("cutoff").value;
+
+  // Retrieve the selected battery type
+  const selectedSystem = document.querySelector('input[type="checkbox"]:checked');
+  const batteryType = selectedSystem.closest('tr').querySelector('td:nth-child(2)').textContent.trim();
+
+  // Automatically assign the correct cutoff value based on battery type
+  let cutoff;
+  if (batteryType === 'AGM') {
+    cutoff = 20;
+  } else if (batteryType === 'Lithium') {
+    cutoff = 5;
+  }
 
   const postData = {
     lat: lat,
@@ -85,6 +96,7 @@ function callApi() {
       document.getElementById("pvgisResponse").innerText = `Error fetching data: ${error.message}. Please ensure that the API endpoint is reachable and the input parameters are valid.`;
     });
 }
+
 
 function displayRelevantData(data) {
   const responseDiv = document.getElementById("pvgisResponse");
