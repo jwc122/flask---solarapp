@@ -30,7 +30,7 @@ def fetch_pvgis_data():
     cutoff = data.get('cutoff')
 
     # Call the PVGIS API with the appropriate parameters
-    pvgis_api_url = f"https://re.jrc.ec.europa.eu/api/v5_2/SHScalc?lat={lat}&lon={lon}&peakpower={peakpower}&batterysize={batterysize}&consumptionday={consumptionday}&cutoff={cutoff}&angle={angle}&aspect={azimuth}"
+    pvgis_api_url = f"https://re.jrc.ec.europa.eu/api/v5_3/SHScalc?lat={lat}&lon={lon}&peakpower={peakpower}&batterysize={batterysize}&consumptionday={consumptionday}&cutoff={cutoff}&angle={angle}&aspect={azimuth}"
 
 
     response = requests.get(pvgis_api_url)

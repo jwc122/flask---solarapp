@@ -89,6 +89,8 @@ function callApi() {
         document.getElementById("pvgisResponse").innerText = `Error from PVGIS API: ${data.error}`;
       } else {
         displayRelevantData(data.data);
+        // Set the initial button text to "View Battery Statistics" since E_d is shown first
+        document.getElementById("changeButton").innerText = 'View Battery Statistics';
       }
     })
     .catch(error => {
@@ -98,6 +100,7 @@ function callApi() {
 }
 
 
+
 function displayRelevantData(data) {
   const responseDiv = document.getElementById("pvgisResponse");
   const monthNames = ["January", "February", "March", "April", "May", "June", 
@@ -105,10 +108,9 @@ function displayRelevantData(data) {
 
   const rows = data.trim().split(/\s+/);
 
-  const E_d_values = [];
-  const E_lost_d_values = [];
-  const f_f_values = [];
-  const f_e_values = [];
+  const usableEnergyValues = []; // Replaces E_d values
+  const batteryFullValues = []; // Replaces f_f values
+  const batteryEmptyValues = []; // Replaces f_e values
   const months = [];
 
   for (let i = 0; i < rows.length; i += 5) {
@@ -116,25 +118,25 @@ function displayRelevantData(data) {
 
     if (monthIndex >= 0 && monthIndex < 12) {
       const monthName = monthNames[monthIndex];
-      const E_d = parseFloat(rows[i + 1]);
-      const E_lost_d = parseFloat(rows[i + 2]);
-      const f_f = parseFloat(rows[i + 3]);
-      const f_e = parseFloat(rows[i + 4]);
+      const usableEnergy = parseFloat(rows[i + 1]); // Usable energy (was E_d)
+      const batteryFull = parseFloat(rows[i + 3]); // Battery Full (was f_f)
+      const batteryEmpty = parseFloat(rows[i + 4]); // Battery Empty (was f_e)
 
       months.push(monthName);
-      E_d_values.push(E_d);
-      E_lost_d_values.push(E_lost_d);
-      f_f_values.push(f_f);
-      f_e_values.push(f_e);
+      usableEnergyValues.push(usableEnergy);
+      batteryFullValues.push(batteryFull);
+      batteryEmptyValues.push(batteryEmpty);
     }
   }
 
   responseDiv.innerHTML = `
-    <button id="changeButton">Change</button>
+    <button id="changeButton">View Battery Statistics</button>
     <canvas id="chartCanvas" width="400" height="200"></canvas>
   `;
 
   const ctx = document.getElementById('chartCanvas').getContext('2d');
+
+  let isShowingUsableEnergy = true; // Track the current state of the graph
 
   let currentChart = new Chart(ctx, {
     type: 'bar',
@@ -142,14 +144,9 @@ function displayRelevantData(data) {
       labels: months,
       datasets: [
         {
-          label: 'E_d (Wh/d)',
-          data: E_d_values,
+          label: 'Usable Energy (Wh/d)', // Initial view is Usable Energy
+          data: usableEnergyValues,
           backgroundColor: 'rgba(255, 149, 0, 0.5)'
-        },
-        {
-          label: 'E_lost_d (Wh/d)',
-          data: E_lost_d_values,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)'
         }
       ]
     },
@@ -166,20 +163,21 @@ function displayRelevantData(data) {
   document.getElementById('changeButton').addEventListener('click', () => {
     currentChart.destroy();
 
-    if (currentChart.config.data.datasets[0].label === 'E_d (Wh/d)') {
+    if (isShowingUsableEnergy) {
+      // Switch to Battery Full and Battery Empty graph
       currentChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: months,
           datasets: [
             {
-              label: 'f_f (%)',
-              data: f_f_values,
+              label: 'Battery Full (%)',
+              data: batteryFullValues,
               backgroundColor: 'rgba(255, 149, 0, 0.5)'
             },
             {
-              label: 'f_e (%)',
-              data: f_e_values,
+              label: 'Battery Empty (%)',
+              data: batteryEmptyValues,
               backgroundColor: 'rgba(0, 0, 0, 0.5)'
             }
           ]
@@ -193,21 +191,21 @@ function displayRelevantData(data) {
           }
         }
       });
+
+      // Update button text
+      document.getElementById("changeButton").innerText = 'View Usable Energy';
+      isShowingUsableEnergy = false;
     } else {
+      // Switch back to Usable Energy graph
       currentChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: months,
           datasets: [
             {
-              label: 'E_d (Wh/d)',
-              data: E_d_values,
+              label: 'Usable Energy (Wh/d)',
+              data: usableEnergyValues,
               backgroundColor: 'rgba(255, 149, 0, 0.5)'
-            },
-            {
-              label: 'E_lost_d (Wh/d)',
-              data: E_lost_d_values,
-              backgroundColor: 'rgba(0, 0, 0, 0.5)'
             }
           ]
         },
@@ -220,9 +218,17 @@ function displayRelevantData(data) {
           }
         }
       });
+
+      // Update button text
+      document.getElementById("changeButton").innerText = 'View Battery Statistics';
+      isShowingUsableEnergy = true;
     }
   });
 }
+
+
+
+
 
 document.getElementById('submitButton').addEventListener('click', callApi);
 
